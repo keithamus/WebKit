@@ -1255,13 +1255,14 @@ void HTMLInputElement::defaultEventHandler(Event& event)
         if (event.defaultHandled())
             return;
     }
-
+    
     // DOMActivate events cause the input to be "activated" - in the case of image and submit inputs, this means
     // actually submitting the form. For reset inputs, the form is reset. These events are sent when the user clicks
     // on the element, or presses enter while it is the active element. JavaScript code wishing to activate the element
     // must dispatch a DOMActivate event - a click event will not do the job.
     if (event.type() == eventNames().DOMActivateEvent) {
         m_inputType->handleDOMActivateEvent(event);
+        handleInvokerTargetAction();
         handlePopoverTargetAction();
         if (event.defaultHandled())
             return;

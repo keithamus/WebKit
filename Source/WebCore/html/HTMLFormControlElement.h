@@ -99,8 +99,12 @@ public:
     virtual String resultForDialogSubmit() const;
 
     HTMLElement* popoverTargetElement() const;
+    HTMLElement* invokerTargetElement() const;
+    HTMLElement* interestTargetElement() const;
     const AtomString& popoverTargetAction() const;
+    const AtomString& invokerAction() const;
     void setPopoverTargetAction(const AtomString& value);
+    void setInvokerAction(const AtomString& value);
 
     using Node::ref;
     using Node::deref;
@@ -127,6 +131,8 @@ protected:
 
     void dispatchBlurEvent(RefPtr<Element>&& newFocusedElement) override;
 
+    void handleInvokerTargetAction();
+    void handleInterestTargetAction();
     void handlePopoverTargetAction() const;
 
 private:

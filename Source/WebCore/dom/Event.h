@@ -115,6 +115,8 @@ public:
     virtual bool isPointerEvent() const { return false; }
     virtual bool isTextEvent() const { return false; }
     virtual bool isToggleEvent() const { return false; }
+    virtual bool isInvokeEvent() const { return false; }
+    virtual bool isInterestEvent() const { return false; }
     virtual bool isTouchEvent() const { return false; }
     virtual bool isUIEvent() const { return false; }
     virtual bool isVersionChangeEvent() const { return false; }

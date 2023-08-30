@@ -36,6 +36,8 @@
 #include "HTMLButtonElement.h"
 #include "HTMLFormElement.h"
 #include "HTMLInputElement.h"
+#include "InvokeEvent.h"
+#include "InterestEvent.h"
 #include "LocalFrame.h"
 #include "LocalFrameView.h"
 #include "PopoverData.h"
@@ -340,6 +342,99 @@ static const AtomString& hideAtom()
 {
     static MainThreadNeverDestroyed<const AtomString> identifier("hide"_s);
     return identifier;
+}
+
+// https://html.spec.whatwg.org/#invoker-target-element
+HTMLElement* HTMLFormControlElement::invokerTargetElement() const
+{
+    auto canInvokeElements = [](const HTMLFormControlElement& element) -> bool {
+        if (!element.document().settings().invokerAttributeEnabled())
+            return false;
+        if (auto* inputElement = dynamicDowncast<HTMLInputElement>(element))
+            return inputElement->isTextButton() || inputElement->isImageButton();
+        return is<HTMLButtonElement>(element);
+    };
+
+    if (!canInvokeElements(*this))
+        return nullptr;
+
+    if (isDisabledFormControl())
+        return nullptr;
+
+    if (form() && isSubmitButton())
+        return nullptr;
+
+    auto* element = dynamicDowncast<HTMLElement>(getElementAttribute(invokertargetAttr));
+    
+    return element;
+}
+
+const AtomString& HTMLFormControlElement::invokerAction() const
+{
+    return attributeWithoutSynchronization(HTMLNames::invokeractionAttr);
+}
+
+void HTMLFormControlElement::setInvokerAction(const AtomString& value)
+{
+    setAttributeWithoutSynchronization(HTMLNames::invokeractionAttr, value);
+}
+
+
+// https://html.spec.whatwg.org/#interest-target-element
+HTMLElement* HTMLFormControlElement::interestTargetElement() const
+{
+    auto canShowInterest = [](const HTMLFormControlElement& element) -> bool {
+        if (!element.document().settings().invokerAttributeEnabled())
+            return false;
+        return is<HTMLButtonElement>(element) || is<HTMLInputElement>(element);
+    };
+
+    if (!canShowInterest(*this))
+        return nullptr;
+
+    if (isDisabledFormControl())
+        return nullptr;
+
+    auto* element = dynamicDowncast<HTMLElement>(getElementAttribute(interesttargetAttr));
+    
+    return element;
+}
+
+void HTMLFormControlElement::handleInvokerTargetAction()
+{
+    RefPtr target = invokerTargetElement();
+    if (!target)
+        return;
+    
+    auto action = invokerAction();
+
+    target->dispatchEvent(
+        InvokeEvent::create(
+            eventNames().invokeEvent,
+            InvokeEvent::Init {
+                .relatedTarget = WTF::move(*this),
+                .action = action
+            },
+            Event::IsCancelable::Yes
+        )
+    );
+}
+
+void HTMLFormControlElement::handleInterestTargetAction()
+{
+    RefPtr target = interestTargetElement();
+    if (!target)
+        return;
+    
+    target->dispatchEvent(
+        InterestEvent::create(
+            eventNames().interestEvent,
+            InterestEvent::Init {
+                .relatedTarget = WTF::move(*this),
+            },
+            Event::IsCancelable::Yes
+        )
+    );
 }
 
 // https://html.spec.whatwg.org/#popover-target-element

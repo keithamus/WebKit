@@ -1066,6 +1066,8 @@ JS_BINDING_IDLS := \
     $(WebCore)/dom/IdleRequestOptions.idl \
     $(WebCore)/dom/InnerHTML.idl \
     $(WebCore)/dom/InputEvent.idl \
+    $(WebCore)/dom/InterestEvent.idl \
+    $(WebCore)/dom/InvokeEvent.idl \
     $(WebCore)/dom/KeyboardEvent.idl \
     $(WebCore)/dom/MessageChannel.idl \
     $(WebCore)/dom/MessageEvent.idl \

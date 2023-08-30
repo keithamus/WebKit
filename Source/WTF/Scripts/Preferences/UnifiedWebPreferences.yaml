@@ -3531,6 +3531,20 @@ InvisibleAutoplayNotPermitted:
       default: false
     WebCore:
       default: false
+      
+InvokerAttributeEnabled:
+  type: bool
+  status: stable
+  category: html
+  humanReadableName: "HTML invoker attribute"
+  humanReadableDescription: "Enable HTML invoker & interest attribute support"
+  defaultValue:
+    WebKitLegacy:
+      default: WebKit::defaultInvokerAttributeEnabled()
+    WebKit:
+      default: WebKit::defaultInvokerAttributeEnabled()
+    WebCore:
+      default: true
 
 IsAccessibilityIsolatedTreeEnabled:
   type: bool

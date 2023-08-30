@@ -1057,6 +1057,8 @@ set(WebCore_NON_SVG_IDL_FILES
     dom/IdleRequestOptions.idl
     dom/InnerHTML.idl
     dom/InputEvent.idl
+    dom/InterestEvent.idl
+    dom/InvokeEvent.idl
     dom/KeyboardEvent.idl
     dom/MessageChannel.idl
     dom/MessageEvent.idl

@@ -165,6 +165,8 @@ namespace WebCore {
     macro(inputsourceschange) \
     macro(install) \
     macro(invalid) \
+    macro(invoke) \
+    macro(interest) \
     macro(keydown) \
     macro(keypress) \
     macro(keystatuseschange) \
@@ -180,6 +182,7 @@ namespace WebCore {
     macro(loadingdone) \
     macro(loadingerror) \
     macro(loadstart) \
+    macro(loseinterest) \
     macro(lostpointercapture) \
     macro(mark) \
     macro(merchantvalidation) \
