@@ -365,6 +365,7 @@ static Atspi::Role atspiRole(AccessibilityRole role)
     case AccessibilityRole::SliderThumb:
     case AccessibilityRole::SpinButtonPart:
     case AccessibilityRole::Summary:
+    case AccessibilityRole::Strong:
     case AccessibilityRole::TableHeaderContainer:
     case AccessibilityRole::Suggestion:
         return Atspi::Role::Unknown;

@@ -103,7 +103,7 @@ PASS el-progress
 FAIL el-s assert_equals: <s data-testname="el-s" data-expectedrole="deletion" class="ex">x</s> expected "deletion" but got ""
 PASS el-search
 PASS el-select-listbox
-FAIL el-strong assert_equals: <strong data-testname="el-strong" data-expectedrole="strong" class="ex">x</strong> expected "strong" but got ""
+PASS el-strong
 PASS el-sub
 PASS el-sup
 PASS el-time

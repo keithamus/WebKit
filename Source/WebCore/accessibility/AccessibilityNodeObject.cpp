@@ -27,6 +27,7 @@
 */
 
 #include "config.h"
+#include "AXCoreObject.h"
 #include "AccessibilityNodeObject.h"
 
 #include "AXLogger.h"
@@ -524,6 +525,9 @@ AccessibilityRole AccessibilityNodeObject::determineAccessibilityRoleFromNode(Tr
         return AccessibilityRole::Group;
     if (is<Element>(*node()) && downcast<Element>(*node()).isFocusable())
         return AccessibilityRole::Group;
+    
+    if (node()->hasTagName(strongTag))
+        return AccessibilityRole::Strong;
 
     return AccessibilityRole::Unknown;
 }

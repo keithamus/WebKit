@@ -217,6 +217,7 @@ enum class AccessibilityRole {
     SpinButtonPart,
     Splitter,
     StaticText,
+    Strong,
     Subscript,
     Suggestion,
     Summary,
@@ -467,6 +468,8 @@ ALWAYS_INLINE String accessibilityRoleToString(AccessibilityRole role)
         return "Splitter"_s;
     case AccessibilityRole::StaticText:
         return "StaticText"_s;
+    case AccessibilityRole::Strong:
+        return "Strong"_s;
     case AccessibilityRole::Subscript:
         return "Subscript"_s;
     case AccessibilityRole::Suggestion:
