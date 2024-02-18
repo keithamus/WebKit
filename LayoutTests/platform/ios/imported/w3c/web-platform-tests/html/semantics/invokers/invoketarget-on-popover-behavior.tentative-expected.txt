@@ -19,4 +19,16 @@ PASS invoking (as hidepopover) closed popover is noop
 FAIL invoking (as hidepopover) open popover closes assert_false: expected false got true
 FAIL invoking (as hidepopover - case insensitive) open popover closes assert_false: expected false got true
 PASS invoking (as hidepopover) open popover with preventDefault does not close
+PASS invoking (as foo) on popover does nothing
+PASS invoking (as foo) on open popover does nothing
+PASS invoking (as togglemodal) on popover does nothing
+PASS invoking (as togglemodal) on open popover does nothing
+PASS invoking (as showpicker) on popover does nothing
+PASS invoking (as showpicker) on open popover does nothing
+PASS invoking (as toggle) on popover does nothing
+PASS invoking (as toggle) on open popover does nothing
+PASS invoking (as open) on popover does nothing
+PASS invoking (as open) on open popover does nothing
+PASS invoking (as close) on popover does nothing
+PASS invoking (as close) on open popover does nothing
 

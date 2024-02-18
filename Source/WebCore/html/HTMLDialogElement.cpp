@@ -128,6 +128,44 @@ void HTMLDialogElement::close(const String& result)
     queueTaskToDispatchEvent(TaskSource::UserInteraction, Event::create(eventNames().closeEvent, Event::CanBubble::No, Event::IsCancelable::No));
 }
 
+static const AtomString& closeAtom()
+{
+    static MainThreadNeverDestroyed<const AtomString> identifier("close"_s);
+    return identifier;
+}
+
+static const AtomString& showModalAtom()
+{
+    static MainThreadNeverDestroyed<const AtomString> identifier("showmodal"_s);
+    return identifier;
+}
+
+bool HTMLDialogElement::handleInvokeInternal(const HTMLFormControlElement* invoker, const AtomString& action)
+{
+    if (HTMLElement::handleInvokeInternal(invoker, action))
+        return true;
+
+    if (isPopoverShowing())
+        return false;
+
+    bool shouldClose = equalIgnoringASCIICase(action, autoAtom())
+        || equalIgnoringASCIICase(action, closeAtom());
+    bool shouldOpen = equalIgnoringASCIICase(action, autoAtom())
+        || equalIgnoringASCIICase(action, showModalAtom());
+
+    if (isOpen() && shouldClose) {
+        close(nullString());
+        return true;
+    }
+
+    if (!isOpen() && shouldOpen) {
+        showModal();
+        return true;
+    }
+
+    return false;
+}
+
 void HTMLDialogElement::queueCancelTask()
 {
     queueTaskKeepingThisNodeAlive(TaskSource::UserInteraction, [this] {

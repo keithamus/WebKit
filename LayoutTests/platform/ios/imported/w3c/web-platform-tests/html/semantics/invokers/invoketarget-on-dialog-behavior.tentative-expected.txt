@@ -1,0 +1,40 @@
+
+
+FAIL invoking (as auto) closed dialog opens as modal assert_true: expected true got false
+PASS invoking (as auto) closed dialog with preventDefault is noop
+FAIL invoking (as auto) open dialog closes assert_false: expected false got true
+PASS invoking (as auto) open dialog with preventDefault is noop
+PASS invoking (as auto) open modal dialog with preventDefault is noop
+FAIL invoking (as explicit auto) closed dialog opens as modal assert_true: expected true got false
+FAIL invoking (as auto - case insensitive) closed dialog opens as modal assert_true: expected true got false
+FAIL invoking (as explicit auto) open dialog closes assert_false: expected false got true
+FAIL invoking (as explicit auto) closed dialog with preventDefault is noop assert_false: expected false got true
+PASS invoking (as explicit auto) open dialog with preventDefault is noop
+FAIL invoking (as close) open dialog closes assert_false: expected false got true
+FAIL invoking (as close) open modal dialog closes promise_test: Unhandled rejection with value: object "InvalidStateError: Cannot call showModal() on an open non-modal dialog."
+PASS invoking (as close) open dialog with preventDefault is noop
+PASS invoking (as foo) on dialog does nothing
+PASS invoking (as foo) on open dialog does nothing
+PASS invoking (as foo) on open modal dialog does nothing
+PASS invoking (as showpopover) on dialog does nothing
+PASS invoking (as showpopover) on open dialog does nothing
+PASS invoking (as showpopover) on open modal dialog does nothing
+PASS invoking (as hidepopover) on dialog does nothing
+PASS invoking (as hidepopover) on open dialog does nothing
+PASS invoking (as hidepopover) on open modal dialog does nothing
+PASS invoking (as togglepopover) on dialog does nothing
+PASS invoking (as togglepopover) on open dialog does nothing
+PASS invoking (as togglepopover) on open modal dialog does nothing
+PASS invoking (as showpicker) on dialog does nothing
+PASS invoking (as showpicker) on open dialog does nothing
+PASS invoking (as showpicker) on open modal dialog does nothing
+PASS invoking (as showmodal) dialog as open popover is noop
+PASS invoking (as close) dialog as open popover is noop
+PASS invoking (as auto) dialog as open popover is noop
+PASS invoking (as showmodal) dialog that is removed is noop
+PASS invoking (as auto) dialog that is removed is noop
+PASS invoking (as showmodal) dialog from a detached invoker
+PASS invoking (as auto) dialog from a detached invoker
+PASS invoking (as showmodal) detached dialog from a detached invoker
+PASS invoking (as auto) detached dialog from a detached invoker
+

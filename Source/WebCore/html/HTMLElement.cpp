@@ -1596,6 +1596,49 @@ PopoverState HTMLElement::popoverState() const
     return popoverData() ? popoverData()->popoverState() : PopoverState::None;
 }
 
+static const AtomString& togglePopoverAtom()
+{
+    static MainThreadNeverDestroyed<const AtomString> identifier("togglepopover"_s);
+    return identifier;
+}
+
+static const AtomString& showPopoverAtom()
+{
+    static MainThreadNeverDestroyed<const AtomString> identifier("showpopover"_s);
+    return identifier;
+}
+
+static const AtomString& hidePopoverAtom()
+{
+    static MainThreadNeverDestroyed<const AtomString> identifier("hidepopover"_s);
+    return identifier;
+}
+
+bool HTMLElement::handleInvokeInternal(const HTMLFormControlElement* invoker, const AtomString& action)
+{
+    if (popoverState() == PopoverState::None)
+        return false;
+
+    bool shouldShowPopover = equalIgnoringASCIICase(action, autoAtom())
+        || equalIgnoringASCIICase(action, togglePopoverAtom())
+        || equalIgnoringASCIICase(action, showPopoverAtom());
+    bool shouldHidePopover = equalIgnoringASCIICase(action, autoAtom())
+        || equalIgnoringASCIICase(action, togglePopoverAtom())
+        || equalIgnoringASCIICase(action, hidePopoverAtom());
+
+    if (!isPopoverShowing() && shouldShowPopover) {
+        showPopover(invoker);
+        return true;
+    }
+
+    if (isPopoverShowing() && shouldHidePopover) {
+        hidePopover();
+        return true;
+    }
+
+    return false;
+}
+
 #if PLATFORM(IOS_FAMILY)
 
 SelectionRenderingBehavior HTMLElement::selectionRenderingBehavior(const Node* node)

@@ -49,6 +49,8 @@ public:
 
     void runFocusingSteps();
 
+    bool handleInvokeInternal(const HTMLFormControlElement* invoker, const AtomString&) override;
+
 private:
     HTMLDialogElement(const QualifiedName&, Document&);
 

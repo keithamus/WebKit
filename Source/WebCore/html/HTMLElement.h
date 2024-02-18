@@ -162,7 +162,7 @@ public:
     void setPopover(const AtomString& value) { setAttributeWithoutSynchronization(HTMLNames::popoverAttr, value); };
     void popoverAttributeChanged(const AtomString& value);
 
-    virtual void handleInvokeInternal(const AtomString&) { }
+    virtual bool handleInvokeInternal(const HTMLFormControlElement* invoker, const AtomString&);
 
 #if PLATFORM(IOS_FAMILY)
     static SelectionRenderingBehavior selectionRenderingBehavior(const Node*);
