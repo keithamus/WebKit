@@ -148,13 +148,13 @@ bool HTMLDialogElement::handleInvokeInternal(const HTMLFormControlElement* invok
     if (isPopoverShowing())
         return false;
 
-    bool shouldClose = equalIgnoringASCIICase(action, autoAtom())
+    bool shouldClose = equalIgnoringASCIICase(action, emptyAtom())
         || equalIgnoringASCIICase(action, closeAtom());
-    bool shouldOpen = equalIgnoringASCIICase(action, autoAtom())
+    bool shouldOpen = equalIgnoringASCIICase(action, emptyAtom())
         || equalIgnoringASCIICase(action, showModalAtom());
 
     if (isOpen() && shouldClose) {
-        close(nullString());
+        close(invoker->getAttribute(HTMLNames::valueAttr));
         return true;
     }
 

@@ -1619,10 +1619,14 @@ bool HTMLElement::handleInvokeInternal(const HTMLFormControlElement* invoker, co
     if (popoverState() == PopoverState::None)
         return false;
 
-    bool shouldShowPopover = equalIgnoringASCIICase(action, autoAtom())
+    auto dialog = dynamic_cast<HTMLDialogElement>(*this);
+    if (dialog && dialog->isOpen())
+        return false;
+
+    bool shouldShowPopover = equalIgnoringASCIICase(action, emptyAtom())
         || equalIgnoringASCIICase(action, togglePopoverAtom())
         || equalIgnoringASCIICase(action, showPopoverAtom());
-    bool shouldHidePopover = equalIgnoringASCIICase(action, autoAtom())
+    bool shouldHidePopover = equalIgnoringASCIICase(action, emptyAtom())
         || equalIgnoringASCIICase(action, togglePopoverAtom())
         || equalIgnoringASCIICase(action, hidePopoverAtom());
 

@@ -75,7 +75,7 @@
   // auto
 
   promise_test(async function (t) {
-    invokerbutton.setAttribute("invokeaction", "auto");
+    invokerbutton.setAttribute("invokeaction", "");
     t.add_cleanup(() => {
       invokerbutton.removeAttribute("invokeaction");
       invokee.close();
@@ -88,20 +88,7 @@
   }, "invoking (as explicit auto) closed dialog opens as modal");
 
   promise_test(async function (t) {
-    invokerbutton.setAttribute("invokeaction", "aUtO");
-    t.add_cleanup(() => {
-      invokerbutton.removeAttribute("invokeaction");
-      invokee.close();
-    });
-    assert_false(invokee.open);
-    assert_false(invokee.matches(":modal"));
-    await clickOn(invokerbutton);
-    assert_true(invokee.open);
-    assert_true(invokee.matches(":modal"));
-  }, "invoking (as auto - case insensitive) closed dialog opens as modal");
-
-  promise_test(async function (t) {
-    invokerbutton.setAttribute("invokeaction", "auto");
+    invokerbutton.setAttribute("invokeaction", "");
     t.add_cleanup(() => invokerbutton.removeAttribute("invokeaction"));
     invokee.show();
     assert_true(invokee.open);
@@ -112,7 +99,7 @@
   }, "invoking (as explicit auto) open dialog closes");
 
   promise_test(async function (t) {
-    invokerbutton.setAttribute("invokeaction", "auto");
+    invokerbutton.setAttribute("invokeaction", "");
     t.add_cleanup(() => {
       invokerbutton.removeAttribute("invokeaction");
       invokee.close();
@@ -128,7 +115,7 @@
   }, "invoking (as explicit auto) closed dialog with preventDefault is noop");
 
   promise_test(async function (t) {
-    invokerbutton.setAttribute("invokeaction", "auto");
+    invokerbutton.setAttribute("invokeaction", "");
     t.add_cleanup(() => {
       invokerbutton.removeAttribute("invokeaction");
       invokee.close();
@@ -222,7 +209,7 @@
   );
 
   // Open Popovers using Dialog actions
-  ["showmodal", "close", "auto"].forEach((action) => {
+  ["showmodal", "close", ""].forEach((action) => {
     promise_test(async function (t) {
       invokee.setAttribute("popover", "manual");
       invokee.showPopover();
@@ -246,7 +233,7 @@
   });
 
   // Dialogs being removed on invoke
-  ["showmodal", "auto"].forEach((action) => {
+  ["showmodal", ""].forEach((action) => {
     promise_test(async function (t) {
       const invokee = document.querySelector("#invokee");
       invokerbutton.setAttribute("invokeaction", action);
@@ -272,7 +259,7 @@
   });
 
   // Invoking Dialog from a disconnected button is a no-op
-  ["showmodal", "auto"].forEach((action) => {
+  ["showmodal", ""].forEach((action) => {
     promise_test(async function (t) {
       const invokerbutton = document.createElement('button');
       invokerbutton.invokeTargetElement = invokee;
@@ -286,7 +273,7 @@
   });
 
   // Invoking disconnected Dialog form a disconnected button is a no-op
-  ["showmodal", "auto"].forEach((action) => {
+  ["showmodal", ""].forEach((action) => {
     promise_test(async function (t) {
       const invokerbutton = document.createElement('button');
       const invokee = document.createElement('dialog');
