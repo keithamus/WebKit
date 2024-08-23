@@ -1224,6 +1224,7 @@ static inline FunctionType addPseudoClassType(const CSSSelector& selector, Selec
     case CSSSelector::PseudoClass::NthLastOfType:
     case CSSSelector::PseudoClass::WebKitDrag:
     case CSSSelector::PseudoClass::Has:
+    case CSSSelector::PseudoClass::HasSlotted:
     case CSSSelector::PseudoClass::State:
     // FIXME: <webkit.org/b/278189> CSS JIT: add support for :active-view-transition-type pseudo class
     case CSSSelector::PseudoClass::ActiveViewTransitionType:

@@ -185,6 +185,8 @@ SelectorSpecificity simpleSelectorSpecificity(const CSSSelector& simpleSelector,
             return 0;
         case CSSSelector::PseudoClass::NthChild:
         case CSSSelector::PseudoClass::NthLastChild:
+        case CSSSelector::PseudoClass::HasSlotted:
+            return SelectorSpecificityIncrement::ClassB + maxSpecificity(simpleSelector.selectorList());
         case CSSSelector::PseudoClass::Host:
             return SelectorSpecificityIncrement::ClassB + maxSpecificity(simpleSelector.selectorList());
         default:
@@ -485,6 +487,13 @@ String CSSSelector::selectorText(StringView separator, StringView rightSide) con
 
             // Handle serialization of functional variants.
             switch (selector->pseudoClass()) {
+            case PseudoClass::HasSlotted:
+                if (auto* selectorList = selector->selectorList()) {
+                    builder.append('(');
+                    selectorList->buildSelectorsText(builder);
+                    builder.append(')');
+                }
+                break;
             case PseudoClass::Host:
                 if (auto* selectorList = selector->selectorList()) {
                     builder.append('(');

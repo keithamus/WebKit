@@ -789,6 +789,14 @@ std::unique_ptr<MutableCSSSelector> CSSSelectorParser::consumePseudo(CSSParserTo
             selector->setSelectorList(makeUnique<CSSSelectorList>(WTFMove(selectorList)));
             return selector;
         }
+        case CSSSelector::PseudoClass::HasSlotted: {
+            auto innerSelector = consumeCompoundSelector(block);
+            block.consumeWhitespace();
+            if (!innerSelector || !block.atEnd())
+                return nullptr;
+            selector->adoptSelectorVector(MutableCSSSelectorList::from(WTFMove(innerSelector)));
+            return selector;
+        }
         case CSSSelector::PseudoClass::NthChild:
         case CSSSelector::PseudoClass::NthLastChild:
         case CSSSelector::PseudoClass::NthOfType:

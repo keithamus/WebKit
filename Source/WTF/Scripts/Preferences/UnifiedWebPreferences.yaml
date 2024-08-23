@@ -3176,6 +3176,20 @@ HTTPSByDefaultEnabled:
     WebCore:
       default: false
 
+HasSlottedEnabled:
+  type: bool
+  status: testable
+  category: css
+  humanReadableName: "The :has-slotted() pseudo class"
+  humanReadableDescription: "Support for has-slotted in custom elements"
+  defaultValue:
+    WebKitLegacy:
+      default: false
+    WebKit:
+      default: false
+    WebCore:
+      default: false
+
 HiddenPageCSSAnimationSuspensionEnabled:
   type: bool
   status: embedder

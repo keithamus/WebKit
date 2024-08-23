@@ -1115,7 +1115,24 @@ bool SelectorChecker::checkOne(CheckingContext& checkingContext, LocalContext& c
         case CSSSelector::PseudoClass::VolumeLocked:
             return matchesVolumeLockedPseudoClass(element);
 #endif
-
+        case CSSSelector::PseudoClass::HasSlotted: {
+            if (auto* slotElement = dynamicDowncast<HTMLSlotElement>(element)) {
+                auto elements = slotElement->assignedElements(HTMLSlotElement::AssignedNodesOptions { true });
+                if (auto* selectorList = selector.selectorList()) {
+                    ASSERT(selectorList->listSize() == 1);
+                    for(Ref element : elements) {
+                        LocalContext context(*selectorList->first(), element, VisitedMatchType::Enabled, std::nullopt);
+                        context.inFunctionalPseudoClass = true;
+                        context.pseudoElementEffective = false;
+                        PseudoIdSet ignoreDynamicPseudo;
+                        if (matchRecursively(checkingContext, context, ignoreDynamicPseudo).match != Match::SelectorMatches)
+                            return false;
+                    }
+                }
+                return elements.size() > 0;
+            }
+            return false;
+        }
         case CSSSelector::PseudoClass::Scope: {
             const Node* contextualReferenceNode = !checkingContext.scope ? element.document().documentElement() : checkingContext.scope.get();
             return &element == contextualReferenceNode;
