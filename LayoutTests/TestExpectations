@@ -8152,3 +8152,7 @@ imported/w3c/web-platform-tests/WebIDL/ecmascript-binding/global-mutable-prototy
 # Below tests give `Error fetching /interfaces/webidl.idl` in test output
 imported/w3c/web-platform-tests/WebIDL/idlharness.any.html [ Skip ]
 imported/w3c/web-platform-tests/WebIDL/idlharness.any.worker.html [ Skip ]
+
+# webkit.org/b/280685 imported/w3c/web-platform-tests/css/selectors/featureless-004/5.html are failures.
+imported/w3c/web-platform-tests/css/selectors/featureless-004.html [ Failure ]
+imported/w3c/web-platform-tests/css/selectors/featureless-005.html [ Failure ]
