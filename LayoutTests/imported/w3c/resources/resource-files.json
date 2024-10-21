@@ -4724,6 +4724,8 @@
         "web-platform-tests/css/css-ruby/ruby-with-floats-001-ref.html",
         "web-platform-tests/css/css-ruby/ruby-with-floats-002-ref.html",
         "web-platform-tests/css/css-ruby/ruby-with-floats-003-ref.html",
+        "web-platform-tests/css/css-scoping/reference/green-box.html",
+        "web-platform-tests/css/css-scoping/reference/green-text.html",
         "web-platform-tests/css/css-scoping/scoped-reference-animation-ref.html",
         "web-platform-tests/css/css-scoping/slotted-placeholder-ref.html",
         "web-platform-tests/css/css-scoping/slotted-with-pseudo-element-ref.html",
