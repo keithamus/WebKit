@@ -1223,7 +1223,8 @@ bool SelectorChecker::checkOne(CheckingContext& checkingContext, LocalContext& c
         case CSSSelector::PseudoClass::VolumeLocked:
             return matchesVolumeLockedPseudoClass(element);
 #endif
-
+        case CSSSelector::PseudoClass::HasSlotted:
+            return matchesHasSlottedPseudoClass(element);
         case CSSSelector::PseudoClass::Scope: {
             // During style invalidation, we don't collect the @scope rules.
             if (checkingContext.resolvingMode == SelectorChecker::Mode::StyleInvalidation)
